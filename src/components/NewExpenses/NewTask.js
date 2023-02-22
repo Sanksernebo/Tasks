@@ -1,9 +1,9 @@
 import React from 'react';
-import './NewExpense.css'
+import './NewTask.css'
 
-import ExpenseForm from "./ExpenseForm";
+import TasksForm from "./TasksForm";
 
-const NewExpense = (props) => {
+const NewTask = (props) => {
 
     const saveExpenseDatahandler = (enteredExpenseData) => {
         const expenseData = {
@@ -16,8 +16,8 @@ const NewExpense = (props) => {
 
     return(
         <div className="new-expense">
-            <ExpenseForm onSaveExpenseData={saveExpenseDatahandler}></ExpenseForm>
+            <TasksForm onSaveExpenseData={saveExpenseDatahandler}></TasksForm>
         </div>
     )
 }
-export default NewExpense
+export default NewTask

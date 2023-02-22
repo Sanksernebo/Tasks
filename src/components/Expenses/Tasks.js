@@ -1,11 +1,11 @@
 
 import React, { useState } from 'react';
-import './Expenses.css'
-import ExpenseItem from "./ExpenseItem";
+import './Tasks.css'
+import TasksItem from "./TasksItem";
 import Card from "../UI/Card"
-import ExpensesFilter from "./ExpensesFilter"
+import TasksFilter from "./TasksFilter"
 
-const Expenses = (props) => {
+const Tasks = (props) => {
     const [filteredPriority, setFilteredPriority] =
         useState('All')
 
@@ -15,28 +15,31 @@ const Expenses = (props) => {
         setFilteredPriority(priority)
     }
     const filteredExpenses = props.expenses.filter(
-        (expense) => {
-            return expense.date.getFullYear().toString() === filteredPriority
+        (task) => {
+            if (filteredPriority === 'All') {
+                return task.priority
+            }
+            return task.priority === filteredPriority
         }
     )
 
     return (
         <Card className="expenses">
-            <ExpensesFilter selected={filteredPriority} onChangeFilter={filterChangeHandler}></ExpensesFilter>
+            <TasksFilter selected={filteredPriority} onChangeFilter={filterChangeHandler}></TasksFilter>
 
             {filteredExpenses.length === 0 && <p style={{color: 'white'}}>No tasks found.</p>}
             {filteredExpenses.length > 0 &&
                 filteredExpenses.map((expense) => {
-                    return <ExpenseItem
+                    return <TasksItem
                         id={expense.id}
-                        title={expense.title}
-                        amount={expense.amount}
+                        task={expense.task}
+                        priority={expense.priority}
                         date={expense.date}
-                    ></ExpenseItem>
+                    ></TasksItem>
                 })
             }
         </Card>
     )
 }
 
-export default Expenses
+export default Tasks

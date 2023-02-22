@@ -1,20 +1,20 @@
 
-import './ExpenseForm.css'
+import './TasksForm.css'
 import React, { useState } from 'react';
 
-const ExpenseForm = (props) => {
-    const [enteredTitle, setEnteredTitle] = useState('')
-    const [enteredAmount, setEnteredAmount] = useState('')
+const TasksForm = (props) => {
+    const [enteredTask, setEnteredTask] = useState('')
+    const [enteredPriority, setEnteredPriority] = useState('')
     const [enteredDate, setEnteredDate] = useState('')
     const [formEdit, setFormEdit] = useState(false);
 
 
     const titleChangeHandler = (event) => {
-        setEnteredTitle(event.target.value)
+        setEnteredTask(event.target.value)
     }
 
-    const amountChangeHandler = (event) => {
-        setEnteredAmount(event.target.value)
+    const priorityChangeHandler = (event) => {
+        setEnteredPriority(event.target.value)
     }
 
     const dateChangeHandler = (event) => {
@@ -24,13 +24,13 @@ const ExpenseForm = (props) => {
     const submitHandler = (event) => {
         event.preventDefault()
         const expenseData = {
-            title: enteredTitle,
-            amount: enteredAmount,
+            task: enteredTask,
+            priority: enteredPriority,
             date: new Date(enteredDate)
         }
         props.onSaveExpenseData(expenseData)
-        setEnteredTitle('')
-        setEnteredAmount('')
+        setEnteredTask('')
+        setEnteredPriority('')
         setEnteredDate('')
         setFormEdit(false)
     }
@@ -44,11 +44,11 @@ const ExpenseForm = (props) => {
                     <div className="new-expense__controls">
                         <div className="new-expense__control">
                             <label>New Task</label>
-                            <input type="text" onChange={titleChangeHandler} value={enteredTitle}/>
+                            <input type="text" onChange={titleChangeHandler} value={enteredTask}/>
                         </div>
                         <div className="new-expense__control">
                             <label>Priority</label>
-                            <select value={props.selected} onChange={(event) => props.onChangeFilter(event.target.value)}>
+                            <select value={props.selected} onChange={priorityChangeHandler}>
                                 <option value='Critical'>Critical</option>
                                 <option value='Medium'>Medium</option>
                                 <option value='Low'>Low</option>
@@ -69,4 +69,4 @@ const ExpenseForm = (props) => {
     );
 }
 
-export default ExpenseForm
+export default TasksForm

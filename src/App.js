@@ -1,56 +1,53 @@
 
 import './App.css';
-import Expenses from "./components/Expenses/Expenses";
+import Tasks from "./components/Expenses/Tasks";
 import {useState} from "react";
-import NewExpense from "./components/NewExpenses/NewExpense";
-
-
+import NewTask from "./components/NewExpenses/NewTask";
+import TaskList from "./components/Expenses/TaskList";
+import Card from "./components/UI/Card";
 
 
 const DUMMY_EXPENSES = [
   {
     id: 'e1',
     date: new Date(2024, 0, 10),
-    title:'New book',
-    amount: 30.99
+    task:'Do smart stuff',
+    priority: 'Critical'
   },
   {
     id: 'e2',
     date: new Date(2024, 0, 5),
-    title:'Icecream',
-    amount: 3.99
+    task:'Live laugh love',
+    priority: 'Medium'
   },
   {
     id: 'e3',
     date: new Date(2023, 0, 26),
-    title:'Bag',
-    amount: 399.99
+    task:'Drive car vroom vroom',
+    priority: 'Low'
   }
 
 ]
 
 const App = () => {
-  const [expenses, setExpenses] = useState(DUMMY_EXPENSES)
-  const [filteredYear, setFilteredYear] = useState('2023')
-  const filterChangeHandler = (year) => {
-    setFilteredYear(year)
-  }
+  const [tasks, setTasks] = useState(DUMMY_EXPENSES)
 
 
-  const addExpensehandler = (expense) => {
+
+  const addTaskhandler = (task) => {
     console.log('In App.js')
-    setExpenses((previousExpenses) => {
-      return [expense, ...previousExpenses]
+    setTasks((previousTask) => {
+      return [task, ...previousTask]
     })
   }
-  console.log(expenses)
+  console.log(tasks)
 
   return (
-      <div className="App">
-        <NewExpense onAddExpense={addExpensehandler}></NewExpense>
-        <Expenses expenses={expenses}></Expenses>
+      <Card className="App">
+        <NewTask onAddExpense={addTaskhandler}></NewTask>
+        <Tasks expenses={tasks}></Tasks>
 
-      </div>
+      </Card>
   );
 }
 
